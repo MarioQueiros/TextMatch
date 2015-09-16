@@ -1,0 +1,37 @@
+﻿@model TextMatch.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row TextMatch">
+    @using ( Html.BeginForm( "Index", "Home", FormMethod.Post, new { defaultbutton = "buttonid", @class = "SubmitForm" } ) )
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="Text col-xs-12">
+            @Html.Label( "Text", new { @class = "control-label col-xs-12 col-sm-12" } )
+            @Html.TextBoxFor( m => m.Text, new { @class = "TxtText form-control" } )
+            @Html.ValidationMessageFor( m => m.Text )
+        </div>
+
+        <div class="SubText col-xs-12">
+            @Html.Label( "SubText", new { @class = "control-label col-xs-12 col-sm-12" } )
+            @Html.TextBoxFor( m => m.SubText, new { @class = "TxtSubText form-control" } )
+            @Html.ValidationMessageFor( m => m.SubText )
+        </div>
+
+        if ( !string.IsNullOrEmpty( Model.Positions ) )
+        {
+            <div class="col-xs-12">
+                @Html.Label( string.Concat( "Matched positions: ", Model.Positions ), new { @class = "control-label col-xs-12 col-sm-12" } )
+            </div>
+        }
+
+        <div class="col-xs-12">
+            <div class="BtnSubmit col-xs-12 col-sm-3">
+                <button type="submit" class="Submit btn btn-block">Submit</button>
+            </div>
+        </div>
+    }
+</div>
